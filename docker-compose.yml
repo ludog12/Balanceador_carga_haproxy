@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  node-container-1:
+    image: node:14
+    volumes:
+      C:\Users\Usuario\Desktop\Tp-DOCKE\web1:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "node index.js"
+    networks:
+      tpnode
+
+  node-container-2:
+    image: node:14
+    volumes:
+      C:\Users\Usuario\Desktop\tp_evaluativo\web2:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "node index.js"
+    networks:
+      tpnode
+
+  haproxy-balancer:
+    image: haproxy:latest
+    volumes:
+      C:\Users\Usuario\Desktop\Tp-DOCKE\balanceador/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      "8088:80"
+    networks:
+      tpnode
+
+networks:
+  tpnode:
